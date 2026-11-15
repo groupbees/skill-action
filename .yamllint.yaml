@@ -1,0 +1,23 @@
+extends: default
+
+rules:
+  # yaml-conventions: no `---` opening a file.
+  document-start:
+    present: false
+  # yaml-conventions: block style only. `non-empty` still allows `{}` / `[]`.
+  braces:
+    forbid: non-empty
+  brackets:
+    forbid: non-empty
+  line-length: disable
+  # A GitHub workflow's trigger key is a bare `on:`, which YAML 1.1 reads as a
+  # boolean: checking keys fails every workflow. Values are still checked.
+  truthy:
+    allowed-values:
+      - 'true'
+      - 'false'
+    check-keys: false
+  # The default of 2 rejects the single-space `uses: org/action@<sha> # v1.2.3`
+  # pin comment most tools produce.
+  comments:
+    min-spaces-from-content: 1
